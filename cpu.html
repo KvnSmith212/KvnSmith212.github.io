@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Kvnsmith212.GitHub.io :" />
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css" />
+    <title>Kvnsmith212.GitHub.io</title>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <a id="forkme_banner" href="https://github.com/KvnSmith212">View on GitHub</a>
+        <h1 id="project_title">Kevin Smith</h1>
+        <h2 id="project_tagline">CS Student at The Georgia Institute of Technology</h2>
+      </header>
+    </div>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+      <!-- 32bit PROCESSOR AND ISA -->
+      <h3>32 bit ISA and Processor</h3>
+      <p>This project was an incredibly fun one for me. I designed my own 32 bit instruction set with the constraints that it
+      should be able to support a modern language like C. Included with the ISA is a procedure calling convention and single bus
+      implementation. Instructions can actually be put into memory and have all been tested/work as intended.</p>
+      <em>Instruction Types</em>
+      <p>R-Type Format (For Register-Type Instructions):
+      <br />| opCode | rD | rM | SBZ* | signed_imm14 |</p>
+      <p>I-Type Format (For Instructions with immediate operands and offsets):
+      <br />| opCode | rD | rM | SBZ* | signed_imm14 |</p>
+      <p>J-Type Format (For Jump Instructions):
+      <br />| opCode | rD | rM | SBZ* |</p>
+      <p>S-Type Format (For stack operations):
+      <br />| opCode | rD | SBZ* |</p>
+      <em>Instructions</em>
+      <table>
+        <tr>
+          <th>Instruction</th>
+          <th>OpCode</th>
+          <th>Format</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>ADD</td>
+          <td>000100</td>
+          <td>ADD RD, RM, RN</td>
+          <td>RD = RM + RN</td>
+        </tr>
+        <tr>
+          <td>NAND</td>
+          <td>000111</td>
+          <td>NAND RD, RM, RN</td>
+          <td>RD = RM NAND RN</td>
+        </tr>
+        <tr>
+          <td>SUB</td>
+          <td>001010</td>
+          <td>SUB RD, RM, RN</td>
+          <td>RD = RM - RN</td>
+        </tr>
+        <tr>
+          <td>MUL</td>
+          <td>001101</td>
+          <td>MUL RD, RM, RN</td>
+          <td>RD = RM * RN</td>
+        </tr>
+        <tr>
+          <td>ADDI</td>
+          <td>010000</td>
+          <td>ADDI RD, RM, imm</td>
+          <td>RD = RM + imm</td>
+        </tr>
+        <tr>
+          <td>LW</td>
+          <td>010011</td>
+          <td>LW RD, RM, imm</td>
+          <td>RD = MEM[RM + sign_extend(imm)]</td>
+        </tr>
+        <tr>
+          <td>SW</td>
+          <td>010111</td>
+          <td>SW RD, RM, imm</td>
+          <td>MEM[RM + sign_extend(imm)] = RD</td>
+        </tr>
+        <tr>
+          <td>BEQ</td>
+          <td>100011</td>
+          <td>BEG RD, RM, imm</td>
+          <td>if (RD == RM), PC = PC + 1 + sign_extend(imm)</td>
+        </tr>
+        <tr>
+          <td>JALR</td>
+          <td>011011</td>
+          <td>JALR RD, RM</td>
+          <td>RM = PC + 1; PC = RD</td>
+        </tr>
+        <tr>
+          <td>PUSH</td>
+          <td>011101</td>
+          <td>PUSH RD, RM</td>
+          <td>MEM[RM] = RD; RM = RM + 1</td>
+        </tr>
+        <tr>
+          <td>POP</td>
+          <td>100000</td>
+          <td>POP RD, RM</td>
+          <td>RM = RM - 1; RD = MEM[RM]</td>
+        </tr>
+      </table>
+      <em>Register Set</em>
+      <p>r0 zero
+      <br />r1 return value
+      <br />r2-r5 param 1 or scratch callee saved
+      <br />r6-r9 scratch caller saved
+      <br />r10-r11 temporary scratch
+      <br />r12 frame pointer (fp) callee saved
+      <br />r13 stack pointer (sp) callee saved
+      <br />r14 destination Addr (da)
+      <br />r15 return addr (lr) callee saved</p>
+      <em>Procedure Calling Convention</em>
+      <p>push fp //Save fp and lr
+      <br />push lr
+      <br />addi fp, sp, #0 //Update frame pointer
+      <br />push r2-r5 //Whatever you want to use
+      <br />.
+      <br />.
+      <br />.
+      <br />push r6-r9 //Whatever you want saved
+      <br />addi da, r0, #addr //Where ever you want to go.
+      <br />jalr da, lr //Jump to procedure, save address in lr
+      <br />pop r6-r9 //pop whatever you used
+      <br />.
+      <br />.
+      <br />.
+      <br />pop r2-r5 //Whatever you used
+      <br />pop lr //Restore lr and fp
+      <br />pop fp
+      <br /></p>
+      <em>The Stack</em>
+      <p>---------------------------
+      <br />
+      <br />--------------------------- -- sp
+      <br />
+      <br />-- saved registers
+      <br />
+      <br />
+      <br />---------------------------
+      <br />
+      <br />-- parameters &amp; scratch
+      <br />
+      <br />
+      <br />--------------------------- -- fp
+      <br />-- lr
+      <br />---------------------------
+      <br />-- old fp
+      <br />---------------------------
+      <br /></p>
+      <em>Implementation</em> 
+      <a href="images/cpu/Single_Bus.png">
+        <img src="images/cpu/Single_Bus_Thumb.png" alt="Single Bus CPU" />
+      </a>
+      <p>I decided to include the single bus cpu because the ISA was designed by me and I thought that was really cool, but I also
+      implemented the LC2200 instruction set outlined in 
+      <a href="http://www.amazon.com/Computer-Systems-Integrated-Architecture-Operating/dp/0321486137">this book</a> using a
+      pipelined processor that was really cool as well.</p></section>
+    </div>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with 
+        <a href="http://pages.github.com">GitHub Pages</a></p>
+        <p>This page last updated on 02/25/2015</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -419,5 +419,13 @@ Small Device Styles
     max-width: 480px;
     font-size: 11px;
   }
-
+  
+ /*******************************************************************************
+Styles I've added myself
+*******************************************************************************/
+#my_photo {
+	float:left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}   
 }

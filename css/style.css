@@ -1,0 +1,25 @@
+#top-nav {
+	background-color: #2C2249;
+}
+
+h1 {
+	color: #D9D8DF;
+}
+
+h1 > small{
+	color: #D9D8DF;
+}
+
+.nav > li {
+  float:right;
+}
+
+.nav > li > a {
+	color: #D9D8DF;
+  font-size: 16pt;
+  padding: 1.2em;
+}
+
+.nav > li > a:hover {
+	background-color: #140A2F;
+}

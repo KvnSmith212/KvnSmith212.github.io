@@ -1,25 +1,24 @@
+body {
+	background-color: ghostwhite;
+}
+
 #top-nav {
 	background-color: #2C2249;
+	padding: 1.5em;
+}
+
+#body {
+	padding-top: 2.5em;
+}
+
+#about {
+	padding-bottom: 2.5em;
 }
 
 h1 {
-	color: #D9D8DF;
+	color: ghostwhite;
 }
 
 h1 > small{
-	color: #D9D8DF;
-}
-
-.nav > li {
-  float:right;
-}
-
-.nav > li > a {
-	color: #D9D8DF;
-  font-size: 16pt;
-  padding: 1.2em;
-}
-
-.nav > li > a:hover {
-	background-color: #140A2F;
+	color: ghostwhite;
 }
